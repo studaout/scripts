@@ -19,7 +19,7 @@ then
     #tar and archive with part size <= 10M
     tar cf - $dirName | 7z a -si -v10m $dirName || exit 1
     mv ${dirName}.7z.* $encDirName || exit 1
-    fileCount=$(ls -1 | wc -l)
+    fileCount=$(ls -1 $encDirName | wc -l)
     firstVideoFile=$(ls -1 $dirName/* | grep -i -e mov$ -e mts$ -e avi$ -e mp4$ | head -1)
     mkdir $tmpDir || exit 1
     ffmpeg -i $firstVideoFile -vframes $fileCount -f image2 $tmpDir/sample%03d.jpg || exit 1
